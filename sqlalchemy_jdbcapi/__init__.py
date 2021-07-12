@@ -8,3 +8,6 @@ registry.register(
 registry.register(
     "jdbcapi.oraclejdbc", "sqlalchemy_jdbcapi.oraclejdbc", "OracleJDBCDialect"
 )
+registry.register(
+    "jdbcapi.ignitejdbc", "sqlalchemy_jdbcapi.ignitejdbc", "IgniteJDBCDialect"
+)
