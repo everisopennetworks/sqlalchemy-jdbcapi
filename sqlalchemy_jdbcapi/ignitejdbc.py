@@ -9,7 +9,7 @@ from sqlalchemy import util, exc
 from .base import MixedBinary, BaseDialect
 
 colspecs = util.update_copy(
-    SQLiteDialect.colspecs, {sqltypes.LargeBinary: MixedBinary,},
+    OracleDialect.colspecs, {sqltypes.LargeBinary: MixedBinary,},
 )
 
 
