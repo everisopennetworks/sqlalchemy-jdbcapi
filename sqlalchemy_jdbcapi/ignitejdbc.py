@@ -3,17 +3,17 @@ from __future__ import unicode_literals
 
 import os
 import re
-from sqlalchemy.dialects.sqlite.base import SQLiteDialect
+from sqlalchemy.dialects.oracle.base import OracleDialect
 from sqlalchemy.sql import sqltypes
 from sqlalchemy import util, exc
 from .base import MixedBinary, BaseDialect
 
 colspecs = util.update_copy(
-    SQLiteDialect.colspecs, {sqltypes.LargeBinary: MixedBinary,},
+    OracleDialect.colspecs, {sqltypes.LargeBinary: MixedBinary,},
 )
 
 
-class IgniteJDBCDialect(BaseDialect, SQLiteDialect):
+class IgniteJDBCDialect(BaseDialect, OracleDialect):
     jdbc_db_name = "ignite"
     jdbc_driver_name = "org.apache.ignite.IgniteJdbcThinDriver"
     colspecs = colspecs
