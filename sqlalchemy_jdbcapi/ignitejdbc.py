@@ -47,5 +47,9 @@ class IgniteJDBCDialect(BaseDialect, SQLiteDialect):
         }
         return ((), kwargs)
 
+    def _get_server_version_info(self, connection):
+
+        return 3, 6, 18
+
 
 dialect = IgniteJDBCDialect
