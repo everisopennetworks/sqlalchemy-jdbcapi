@@ -1,22 +1,24 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import os
-import re
-from sqlalchemy.dialects.oracle.base import OracleDialect
-from sqlalchemy.sql import sqltypes
-from sqlalchemy import util, exc
-from .base import MixedBinary, BaseDialect
+# from sqlalchemy import util
+from sqlalchemy.engine.default import DefaultDialect
 
-colspecs = util.update_copy(
-    OracleDialect.colspecs, {sqltypes.LargeBinary: MixedBinary,},
-)
+# from .base import MixedBinary, BaseDialect
+from .base import BaseDialect
 
 
-class IgniteJDBCDialect(BaseDialect, OracleDialect):
+# from sqlalchemy.sql import sqltypes
+
+# colspecs = util.update_copy(
+#    DefaultDialect.colspecs, {sqltypes.LargeBinary: MixedBinary, },
+# )
+
+
+class IgniteJDBCDialect(BaseDialect, DefaultDialect):
     jdbc_db_name = "ignite"
     jdbc_driver_name = "org.apache.ignite.IgniteJdbcThinDriver"
-    colspecs = colspecs
+    colspecs = DefaultDialect.colspecs
 
     def initialize(self, connection):
         super(IgniteJDBCDialect, self).initialize(connection)
@@ -45,11 +47,12 @@ class IgniteJDBCDialect(BaseDialect, OracleDialect):
             # pass driver args via JVM System settings
             "driver_args": []
         }
-        return ((), kwargs)
+        return (), kwargs
 
-    def _get_server_version_info(self, connection):
 
-        return 3, 6, 18
+#    def _get_server_version_info(self, connection):
+#
+#        return 1, 0, 0
 
 
 dialect = IgniteJDBCDialect
