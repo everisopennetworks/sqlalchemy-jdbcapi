@@ -49,6 +49,15 @@ class IgniteJDBCDialect(BaseDialect, DefaultDialect):
         }
         return (), kwargs
 
+    def set_isolation_level(self, connection, level):
+        if hasattr(connection, "connection"):
+            dbapi_connection = connection.connection
+        else:
+            dbapi_connection = connection
+
+        dbapi_connection.autocommit = False
+        connection.rollback()
+
 
 #    def _get_server_version_info(self, connection):
 #
